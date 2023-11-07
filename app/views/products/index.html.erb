@@ -1,0 +1,17 @@
+<% if flash[:notice] %>
+    <%= flash[:notice] %>
+<% end %>
+
+<h1>登録済み商品一覧</h1>
+
+<% @products.each do |product| %>
+  <div>
+    商品ID:<%= product.id %><br>
+    商品名:<%= product.name %><br>
+    商品価格:<%= product.price %>円<br>
+    <%= button_to "削除", product, method: :delete %>
+  </div>
+<% end %>
+
+<%= link_to "商品登録はこちら", new_product_path %>
+
