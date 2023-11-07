@@ -1,0 +1,39 @@
+<h1>自分のカート</h1>
+<% @s = 0 %>
+<% @cart_items.each do |cart_item| %>
+  <% if cart_item.product_id.present? %>
+    <% product = Product.find_by(id: cart_item.product_id) %>
+    <% if product %>
+      <p>
+        <% quantity = cart_item.qty %>
+        <% product_id = product.id %>
+
+        <strong>商品名ID:</strong>
+        <%= product_id %><br>
+
+        <strong>商品名:</strong>
+        <%= product.name %><br>
+
+        <strong>値段:</strong>
+        <%= product.price %>円<br>
+
+        <strong>数量:</strong>
+        <%= quantity %>個<br>
+
+        <strong>小計:</strong>
+        <% subtotal = product.price * quantity if product.price && quantity %>
+        <%= subtotal %>円<br>
+        <% @s += subtotal if subtotal %>
+      </p>
+      <%= button_to "カートから削除", cart_item_path(cart_item), method: :delete %>
+    <% else %>
+      <p>商品が見つかりません。</p>
+    <% end %>
+  <% else %>
+    <p>無効な商品IDです。</p>
+  <% end %>
+<% end %>
+
+<h2>合計金額:<%= @s %>円</h2>
+
+
