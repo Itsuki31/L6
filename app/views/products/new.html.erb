@@ -1,11 +1,26 @@
-<h1>商品登録画面</h1>
+<body>
 
-<%= form_for @product, url: products_path, method: :post, data: { turbo: false } do |f| %>
-  <%= f.label :name, '商品名' %>
-  <%= f.text_field :name %></br>
-  <%= f.label :price, '値段' %>
-  <%= f.text_field :price %></br>
+  <h1>商品登録画面</h1>
   
-  <%= f.submit "登録" %>
-<% end %>
+  <div class="registration">
+    
+    <%= form_for @product, url: products_path, method: :post, data: { turbo: false } do |f| %>
+    
+      <p>
+        <%= f.label :name, '商品名:' %>
+        <%= f.text_field :name %></br>
+      </p>
+      <p>
+        <%= f.label :price, '値段:' %>
+        ¥<%= f.text_field :price %></br>
+      </p>
+      
+      <%= f.submit "登録" %>
+      
+    <% end %>
+  
+    <%=link_to products_path, class: "button_main" do %>商品一覧へ戻る<% end %>
 
+  </div>
+  
+</body>

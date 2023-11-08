@@ -1,18 +1,26 @@
-<% if flash[:notice] %>
-    <%= flash[:notice] %>
-<% end %>
+<body>
 
-<h1>登録済み商品一覧</h1>
+  <% if flash[:notice] %>
+      <%= flash[:notice] %>
+  <% end %>
+  
+  <h1>登録済み商品一覧</h1>
+  
+  <% @products.each do |product| %>
+    <div class="box">
+      
+      <strong>商品ID:</strong><%= product.id %></br>
+      <strong>商品名:</strong><%= product.name %></br>
+      <strong>価格:</strong>¥<%= product.price %></br>
+      <div id=button_sub>
+        <%= link_to "カートに入れる", new_cart_item_path(product_id: product.id), method: :get %>
+      </div>
+      <%= button_to "削除", product_path(product), method: :delete %>
+    
+    </div>
+  <% end %>
+  
+  <%=link_to new_product_path, class: "button_main" do %>商品登録はこちら<% end %>
+  <%=link_to cart_path(1), class: "button_main" do %>カートを見る<% end %>
 
-<% @products.each do |product| %>
-  <div>
-    商品ID:<%= product.id %><br>
-    商品名:<%= product.name %><br>
-    商品価格:<%= product.price %>円<br>
-    <%= button_to "削除", product_path(product), method: :delete %>
-    <%= link_to "この商品をカートに追加", new_cart_item_path(product_id: product.id), method: :get %>
-  </div>
-<% end %>
-
-<%= link_to "商品登録はこちら", new_product_path %>
-<%= link_to "カートを見る", cart_path(1) %>
+</body>

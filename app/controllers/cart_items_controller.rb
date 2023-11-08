@@ -21,7 +21,7 @@ class CartItemsController < ApplicationController
   private
 
   def cart_item_params
-    params.require(:cart_item).permit(:qty, :product_id).merge(cart_id: 1) # cart_id をマージする
+    params.require(:cart_item).permit(:qty, :product_id).merge(cart_id: 1)
   end
 end
 
